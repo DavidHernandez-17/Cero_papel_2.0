@@ -33,7 +33,7 @@ class SendEmailProprietary extends Command
         try 
         {
             //Recorrer todas las carpetas del año actual, utilizando el array creado $meses
-            for ($i=2; $i < 3; $i++) 
+            for ($i=0; $i < $currentMonth; $i++)
             { 
 
                 $currentFolder = opendir("\\\\10.1.1.82\Simi\pdf\\Estados\\{$currentYear}\\{$meses[$i]}");  //Carpeta actual respecto al mes
