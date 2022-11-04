@@ -28,12 +28,12 @@ class SendEmailProprietary extends Command
 
         //Contadores
         $countFiles = 0;
-        $countFolders = null;
+        $countFolders = 0;
 
         try 
         {
             //Recorrer todas las carpetas del año actual, utilizando el array creado $meses
-            for ($i=1; $i < 2; $i++) 
+            for ($i=2; $i < 3; $i++) 
             { 
 
                 $currentFolder = opendir("\\\\10.1.1.82\Simi\pdf\\Estados\\{$currentYear}\\{$meses[$i]}");  //Carpeta actual respecto al mes
@@ -57,7 +57,7 @@ class SendEmailProprietary extends Command
 
                         // // Invoco al validador de archivos
                         $countFiles += 1;
-                        echo($countFiles . "\n");
+                        echo($countFiles . ' ' . $baseName ."\n");
                         $fileValidator = new FileValidatorEstadosCuentaController;
                         $fileValidator->IdentificationValidator($baseName, $adjunto, $routeFile);
                     }

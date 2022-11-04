@@ -34,24 +34,24 @@ class FileValidatorEstadosCuentaController extends Controller
                     $nameProprietary = $searcher->Propietario;
 
                     //Valida si el propietario tiene correo electrónico
-                    // if( $emailProprietary == ' ' )
-                    // {
-                    //     //Registro de log, correo electrónico no encontrado
-                    //     $logController = new LogsEstadosCuentaController();
-                    //     $logController->log_done(
-                    //         'Correo electrónico no encontrado en base de datos',
-                    //         'Estados de cuenta',
-                    //         'null',
-                    //         $identification,
-                    //         'Estados de cuenta',
-                    //         '0',
-                    //         $file
-                    //     );
+                    if( empty($emailProprietary) == true )
+                    {
+                        //Registro de log, correo electrónico no encontrado
+                        $logController = new LogsEstadosCuentaController();
+                        $logController->log_done(
+                            'Correo electrónico no encontrado en base de datos',
+                            'Estados de cuenta',
+                            'null',
+                            $identification,
+                            'Estados de cuenta',
+                            '0',
+                            $file
+                        );
 
-                    //     echo('No tiene correo'. ' '.$identification."\n");
-                    // }
-                    // else
-                    // {
+                        echo('No tiene correo'. ' '.$identification."\n");
+                    }
+                    else
+                    {
                         //Tomo el nombre del propietario y convierto en mayúscula el primer caracter de cada palabra de la cadena
                         $nameProprietaryConverted = ucwords(strtolower($nameProprietary));
 
@@ -81,25 +81,23 @@ class FileValidatorEstadosCuentaController extends Controller
                         // $moveFile->movingFile($currentDirectory, $file);
 
                         //echo('Proceso realizado correctamente.' . ' ' . $identification . ' ' . $emailProprietary ."\n");
-
-                    }                   
+                    }
                 }
-            // }
-            // else
-            // {
-            //     //Registro de log en MySQL, identificación no encontrada
-            //     $logController = new LogsEstadosCuentaController();
-            //     $logController->log_done(
-            //         'Identificación no encontrada en base de datos',
-            //         'Estados de cuenta',
-            //         'null',
-            //         $identification,
-            //         'Estados de cuenta',
-            //         '0',
-            //         $file
-            //     );
-
-            // }
+            }
+            else
+            {
+                //Registro de log en MySQL, identificación no encontrada
+                $logController = new LogsEstadosCuentaController();
+                $logController->log_done(
+                    'Identificación no encontrada en base de datos',
+                    'Estados de cuenta',
+                    'null',
+                    $identification,
+                    'Estados de cuenta',
+                    '0',
+                    $file
+                );
+            }
         } 
         catch (\Throwable $th) 
         {
