@@ -9,7 +9,6 @@ use Illuminate\Console\Command;
 
 class SendEmailProprietary extends Command
 {
-
     protected $signature = 'SendEmail:EstadosCuenta';
 
     protected $description = 'Enviar correos electrónicos a propietarios relacionados con los estados de cuenta';
@@ -28,7 +27,6 @@ class SendEmailProprietary extends Command
 
         //Contadores
         $countFiles = 0;
-        $countFolders = 0;
 
         try 
         {
@@ -48,14 +46,13 @@ class SendEmailProprietary extends Command
                     //Valida si el archivo es extensión pdf
                     if( $ext === 'pdf')
                     {
-                        // $countFiles += 1;
                         //Nombre del archivo
                         $baseName= pathinfo($routeFile, PATHINFO_BASENAME);
 
                         //Archivo adjunto
                         $adjunto = fopen($routeFile, "r");
 
-                        // // Invoco al validador de archivos
+                        // Definición de contador de archivo e invoco al validador de archivos
                         $countFiles += 1;
                         echo($countFiles . ' ' . $baseName ."\n");
                         $fileValidator = new FileValidatorEstadosCuentaController;
@@ -82,7 +79,7 @@ class SendEmailProprietary extends Command
 
         }
 
-        echo(' -> Cantidad de carpetas identificadas: '. $countFolders . ' -> Cantidad de archivos pdf: '. number_format($countFiles, 0) . "\n");
+        echo(' -> Cantidad de archivos pdf: '. number_format($countFiles, 0) . "\n");
         echo('Finaliza proceso de envios, estados de cuenta.');
 
         return Command::SUCCESS;

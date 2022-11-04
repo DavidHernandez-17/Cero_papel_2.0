@@ -24,7 +24,7 @@ class FileValidatorEstadosCuentaController extends Controller
             //Si encuentra un registro relacionado con $identification
             if (sizeof($searchers) != 0 )
             {
-                $logController = new LogsEstadosCuentaController(); //Invoca controlador de registros en log
+                $logController = new LogsEstadosCuentaController(); //Define objeto controlador de registros en log
 
                 //Correo electrónico de los propietarios
                 foreach ($searchers as $searcher)

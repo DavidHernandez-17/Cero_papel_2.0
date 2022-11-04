@@ -14,10 +14,10 @@ class LogsEstadosCuentaController extends Controller
         $todayDateTime = date("Y-m-d H:i:s");
 
         //Fecha envio
-        $fechaEnvioHoy = date("Y-m-d");
+        $dateToday = date("Y-m-d");
 
         //Hora envio
-        $horaEnvioHoy = date("H:i:s");
+        $timeToday = date("H:i:s");
 
         //Remitente
         $remitente = 'auxiliarcorrespondencia@albertoalvarez.com';
@@ -33,8 +33,8 @@ class LogsEstadosCuentaController extends Controller
             $log->id_destinatario = $id_destinatario;
             $log->asunto = $asunto;
             $log->wasEnviado = $wasEnviado;
-            $log->fechaEnvio = $fechaEnvioHoy;
-            $log->horaEnvio = $horaEnvioHoy;
+            $log->fechaEnvio = $dateToday;
+            $log->horaEnvio = $timeToday;
             $log->nombre_adjunto = $nombre_adjunto;
             $log->updated_at = $todayDateTime;
             $log->created_at = $todayDateTime;

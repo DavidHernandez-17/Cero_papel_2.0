@@ -18,7 +18,7 @@ class MoveFileController extends Controller
         $currentMonth = date("m");
 
         //Definición fecha actual
-        $todayDate = date("Y-m-d");
+        $todayDate = date("Y-m-d"); 
 
         $origin = $currentLocation;
 
