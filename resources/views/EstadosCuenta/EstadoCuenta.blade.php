@@ -2,36 +2,32 @@
 <html lang="es">
 
 <head>
-    <meta charset="utf-8">
-    <title>Notificación | Estados de cuenta AA</title>
+    <meta charset="UTF-8">
+    <title>Estados de cuenta AA</title>
 </head>
 
-<body style="background-color: black ">
+<body>
 
-    <table style="max-width: 600px; padding: 10px; margin:0 auto; border-collapse: collapse;">
+    <img src="https://download-accl.zoho.com/v1/docs/prv/empx3617b14e891884ac283e256fe9b6339ad?_t=1668700036952" />
+
+    <table width="600" cellspacing="0" cellpadding="0" style="font-family: Verdana, Geneva, sans-serif; font-size:13px; text-align:justify;">
         <tr>
-            <td style="background-color: #ecf0f1">
-                <div style="color: #34495e; margin: 4% 10% 2%; text-align: justify;font-family: sans-serif">
-                    <img class="img-fluid" style="display:block" width="130" src="https://download-accl.zoho.com/v1/docs/prv/dnf4k96158e63ca8c472c8be7e974fff2f885?_t=1658242904689">
-                    <h2 style="color: #e67e22; margin: 0 0 7px">Hola {{ $nameProprietary }} !!</h2>
-                    <p style="font-size: 15px">
-                        Tienes una nueva notificación relacionada con tu estado de cuenta, recuerda revisar el archivo adjunto, que tengas un excelente día.
-                    </p>
-                    <p style="margin: 2px; font-size: 15px">
-                        Si necesitas un estado de cuenta de meses anteriores lo puedes solicitar sin ningún problema.
-                    </p>
-                                    
-                    <div style="width: 100%;margin:20px 0; display: inline-block;text-align: center">
-                        <a style="text-decoration: none; border-radius: 5px; padding: 11px 23px; color: white; background-color: #3498db" href="https://albertoalvarez.com/">Sitio web</a>
-                    </div>
-
-                    <!-- <img style=" display: block; margin: auto" width="150" src="https://docs.zohopublic.com/docs/prv/90hpw518982c060b2444d8cfde25120b7adcb?_t=1659386952777"> -->
-                    <p style="color: #b3b3b3; font-size: 12px; text-align: center;">Enviado por Automatic</p>
-                    <p style="color: #b3b3b3; font-size: 12px; text-align: center;">Alberto  Álvarez  S  S.A</p>
-                </div>
+            <td width="20">
+            <td>
+                <p>Medellín, </p>
+                <p>Cordial Saludo,</p>
+                <p>Le informamos que el estado de cuenta de su inmueble, correspondiente al mes de Diciembre ya se encuentra disponible.</p>
+                <p>Para consultarlo descargue el archivo adjunto en este correo el cual puede abrir con el número de cédula o NIT del titular. Tambien puede ingresar a www.albertoalvarez.com, haga clic en el bot&oacute;n propietarios, digite usuario y clave, luego seleccione la fecha de corte que desea visualizar.</p>
+                <p>Si tiene alguna inquietud, no dude en contactarnos a través de nuestra línea telefónica: 444 98 98 Opción 1.</p>
+                <p>Si necesita algun documento adicional puede solicitarlo a través de nuestro correo electrónico info@albertoalvarez.com</p>
+                <p>Cordialmente</p>
+                <p>Auxiliar de Correspondencia<br />Alberto Álvarez S S.A</p>
             </td>
+            <td width="100"></td>
         </tr>
     </table>
+
+    <img src="https://download-accl.zoho.com/v1/docs/prv/empx36968a7d786a14ba0b3a80a08568a6874?_t=1668700072377" width='500'/>
 
 </body>
 
