@@ -1,0 +1,35 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('review_estados_cuenta', function (Blueprint $table) {
+            $table->id()->identity();
+            $table->boolean('archivo_es_creado');
+            $table->boolean('es_enviado');
+            $table->integer('id_destinatario');
+            $table->integer('id_log');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('review_estados_cuenta');
+    }
+};

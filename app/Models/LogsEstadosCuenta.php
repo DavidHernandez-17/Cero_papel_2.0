@@ -4,15 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class LogsEstadosCuenta extends Model
 {
     use HasFactory;
 
-    protected $connection = 'mysql';
-    protected $table = 'LogsEstadosCuenta';
+    protected $connection = 'mysql'; //Conexión bd cero papel
+    protected $table = 'logs_estados_cuenta';
 
-    protected $fillable = ['id', 'mensaje', 'nombre_envio', 'remitente', 'destinatario', 'id_destinatario', 'asunto', 'wasEnviado', 'fechaEnvio', 'horaEnvio', 'nombreAdjunto'];
+    protected $fillable = ['id', 'mensaje', 'nombre_envio', 'remitente', 'asunto', 'es_Enviado', 'nombreAdjunto', 'fechaEnvio', 'horaEnvio', 'destinatario', 'id_destinatario'];
     
 }

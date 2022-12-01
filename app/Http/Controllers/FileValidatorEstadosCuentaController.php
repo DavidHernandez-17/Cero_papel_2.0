@@ -18,7 +18,7 @@ class FileValidatorEstadosCuentaController extends Controller
             //Asigno la posición en la cual está el identificador (cédula o nit propietario), array 2, y le resta los 4 últimos caracteres
             $identification = substr($separator[2], 0, -4);
 
-            //Consulta en la base de datos, SQL Server
+            //Consulta en la base de datos, MySQL
             $searchers = Proprietary::where('Ced_Prop', $identification)->limit(1)->get();
 
             //Si encuentra un registro relacionado con $identification
@@ -80,7 +80,7 @@ class FileValidatorEstadosCuentaController extends Controller
                         // $moveFile = new MoveFileController();
                         // $moveFile->movingFile($currentDirectory, $file);
 
-                        // dd('Proceso realizado correctamente.' . ' ' . $identification . ' ' . $emailProprietary ."\n");
+                        echo('Proceso realizado correctamente.' . ' ' . $identification . ' ' . $emailProprietary ."\n");
                     }
                 }
             }
