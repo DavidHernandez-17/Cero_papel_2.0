@@ -9,7 +9,7 @@ class Proprietary extends Model
 {
     use HasFactory;
 
-    protected $connection = 'sqlsrv';
+    protected $connection = 'mysql_HFB';
     
-    protected $table = 'qPropInmuebles';
+    protected $table = 'bitacora__inm_arrendados_actuales';
 }

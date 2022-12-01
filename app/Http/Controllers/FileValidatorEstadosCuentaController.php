@@ -19,7 +19,7 @@ class FileValidatorEstadosCuentaController extends Controller
             $identification = substr($separator[2], 0, -4);
 
             //Consulta en la base de datos, SQL Server
-            $searchers = Proprietary::where('IdCedula', '=', $identification)->limit(1)->get();
+            $searchers = Proprietary::where('Ced_Prop', $identification)->limit(1)->get();
 
             //Si encuentra un registro relacionado con $identification
             if (sizeof($searchers) != 0 )
@@ -30,7 +30,7 @@ class FileValidatorEstadosCuentaController extends Controller
                 foreach ($searchers as $searcher)
                 {
                     //Atributos del propietario
-                    $emailProprietary = $searcher->Email;
+                    $emailProprietary = $searcher->Email_Prop;
                     $nameProprietary = $searcher->Propietario;
 
                     //Valida si el propietario tiene correo electrónico
@@ -56,14 +56,14 @@ class FileValidatorEstadosCuentaController extends Controller
                         $nameProprietaryConverted = ucwords(strtolower($nameProprietary));
 
                         //Realiza envío de correo electrónico, adjunto archivo relacionado.
-                        $data["email"] = 'desarrollo5@albertoalvarez.com';
+                        $data["email"] = 'dh172020@gmail.com';
                         $data["nameProprietary"] = $nameProprietaryConverted;
 
-                        Mail::send('EstadosCuenta.EstadoCuenta', $data, function ($message) use ($data, $adjunto, $file) {
-                            $message->to($data["email"], $data["email"])
-                                ->subject("Estados de cuenta")
-                                ->attachData($adjunto, $file);                            
-                        });
+                        // Mail::send('EstadosCuenta.EstadoCuenta', $data, function ($message) use ($data, $adjunto, $file) {
+                        //     $message->to($data["email"], $data["email"])
+                        //         ->subject("Estados de cuenta")
+                        //         ->attachData($adjunto, $file);                            
+                        // });
 
                         //Registro de log exitoso
                         $logController->log_done(
@@ -80,7 +80,7 @@ class FileValidatorEstadosCuentaController extends Controller
                         // $moveFile = new MoveFileController();
                         // $moveFile->movingFile($currentDirectory, $file);
 
-                        dd('Proceso realizado correctamente.' . ' ' . $identification . ' ' . $emailProprietary ."\n");
+                        // dd('Proceso realizado correctamente.' . ' ' . $identification . ' ' . $emailProprietary ."\n");
                     }
                 }
             }

@@ -54,7 +54,7 @@ class SendEmailProprietary extends Command
 
                         // Definición de contador de archivo e invoco al validador de archivos
                         $countFiles += 1;
-                        echo($countFiles . ' ' . $baseName ."\n");
+                        // echo($countFiles . ' ' . $baseName ."\n");
                         $fileValidator = new FileValidatorEstadosCuentaController;
                         $fileValidator->IdentificationValidator($baseName, $adjunto, $routeFile);
                     }
