@@ -15,7 +15,7 @@ class SendEmailProprietary extends Command
 
     public function handle()
     {
-        echo('Inicia proceso de envios, estados de cuenta.'. "\n");
+        $this->info('Inicia proceso de envios, estados de cuenta.'. "\n");
 
         $meses = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
 
@@ -79,8 +79,8 @@ class SendEmailProprietary extends Command
 
         }
 
-        echo(' -> Cantidad de archivos pdf: '. number_format($countFiles, 0) . "\n");
-        echo('Finaliza proceso de envios, estados de cuenta.');
+        $this->info('-> Cantidad de archivos pdf: '. number_format($countFiles, 0) . "\n");
+        $this->info('Finaliza proceso de envios, estados de cuenta.');
 
         return Command::SUCCESS;
     }
