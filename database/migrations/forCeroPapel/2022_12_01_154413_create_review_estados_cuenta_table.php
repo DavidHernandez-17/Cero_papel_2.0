@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id()->identity();
             $table->boolean('archivo_es_creado');
             $table->boolean('es_enviado');
-            $table->integer('id_destinatario');
-            $table->integer('id_log');
+            $table->string('id_destinatario');
+            $table->integer('id_log')->nullable();
             $table->timestamps();
         });
     }
