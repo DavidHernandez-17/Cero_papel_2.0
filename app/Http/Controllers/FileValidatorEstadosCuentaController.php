@@ -80,7 +80,7 @@ class FileValidatorEstadosCuentaController extends Controller
                         // $moveFile = new MoveFileController();
                         // $moveFile->movingFile($currentDirectory, $file);
 
-                        echo('Proceso realizado correctamente.' . ' ' . $identification . ' ' . $emailProprietary ."\n");
+                        // echo('Proceso realizado correctamente.' . ' ' . $identification . ' ' . $emailProprietary ."\n");
                     }
                 }
             }

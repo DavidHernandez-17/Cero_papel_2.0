@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('fecha_envio');
             $table->string('hora_envio');
             $table->text('destinatario');
-            $table->integer('id_destinatario');
+            $table->string('id_destinatario');
             $table->timestamps();
         });
     }
