@@ -8,7 +8,7 @@
 
 <body>
 
-    <img src="https://download-accl.zoho.com/v1/docs/prv/empx3617b14e891884ac283e256fe9b6339ad?_t=1668700036952" />
+    <img src="https://inmobalbertoalvarez-my.sharepoint.com/personal/desarrollo5_inmobalbertoalvarez_onmicrosoft_com/Documents/Im%C3%A1genes%20Apps/cero_papel/top_mail_estado.jpg" />
 
     <table width="600" cellspacing="0" cellpadding="0" style="font-family: Verdana, Geneva, sans-serif; font-size:13px; text-align:justify;">
         <tr>
@@ -27,7 +27,7 @@
         </tr>
     </table>
 
-    <img src="https://download-accl.zoho.com/v1/docs/prv/empx36968a7d786a14ba0b3a80a08568a6874?_t=1668700072377" width='500'/>
+    <img src="https://inmobalbertoalvarez-my.sharepoint.com/personal/desarrollo5_inmobalbertoalvarez_onmicrosoft_com/Documents/Im%C3%A1genes%20Apps/cero_papel/bottom_mail.jpg" width='500'/>
 
 </body>
 

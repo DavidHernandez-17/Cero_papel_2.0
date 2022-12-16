@@ -56,14 +56,14 @@ class FileValidatorEstadosCuentaController extends Controller
                         $nameProprietaryConverted = ucwords(strtolower($nameProprietary));
 
                         //Realiza envío de correo electrónico, adjunto archivo relacionado.
-                        $data["email"] = 'dh172020@gmail.com';
+                        $data["email"] = $emailProprietary;
                         $data["nameProprietary"] = $nameProprietaryConverted;
 
-                        // Mail::send('EstadosCuenta.EstadoCuenta', $data, function ($message) use ($data, $adjunto, $file) {
-                        //     $message->to($data["email"], $data["email"])
-                        //         ->subject("Estados de cuenta")
-                        //         ->attachData($adjunto, $file);                            
-                        // });
+                        Mail::send('EstadosCuenta.EstadoCuenta', $data, function ($message) use ($data, $adjunto, $file) {
+                            $message->to($data["email"], $data["email"])
+                                ->subject("Estados de cuenta")
+                                ->attachData($adjunto, $file);                  
+                        });
 
                         //Registro de log exitoso
                         $logController->log_done(
@@ -77,10 +77,10 @@ class FileValidatorEstadosCuentaController extends Controller
                         );
 
                         //Mover archivo a carpeta EstadosCuentaEnviados
-                        // $moveFile = new MoveFileController();
-                        // $moveFile->movingFile($currentDirectory, $file);
+                        $moveFile = new MoveFileController();
+                        $moveFile->movingFile($currentDirectory, $file);
 
-                        // echo('Proceso realizado correctamente.' . ' ' . $identification . ' ' . $emailProprietary ."\n");
+                        // dd('Proceso realizado correctamente.' . ' ' . $identification . ' ' . $emailProprietary ."\n");
                     }
                 }
             }
