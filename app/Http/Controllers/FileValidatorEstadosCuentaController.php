@@ -56,7 +56,7 @@ class FileValidatorEstadosCuentaController extends Controller
                         $nameProprietaryConverted = ucwords(strtolower($nameProprietary));
 
                         //Realiza envío de correo electrónico, adjunto archivo relacionado.
-                        $data["email"] = $emailProprietary;
+                        $data["email"] = 'desarrollo5@albertoalvarez.com';
                         $data["nameProprietary"] = $nameProprietaryConverted;
 
                         Mail::send('EstadosCuenta.EstadoCuenta', $data, function ($message) use ($data, $adjunto, $file) {
@@ -77,8 +77,8 @@ class FileValidatorEstadosCuentaController extends Controller
                         );
 
                         //Mover archivo a carpeta EstadosCuentaEnviados
-                        $moveFile = new MoveFileController();
-                        $moveFile->movingFile($currentDirectory, $file);
+                        // $moveFile = new MoveFileController();
+                        // $moveFile->movingFile($currentDirectory, $file);
 
                         // dd('Proceso realizado correctamente.' . ' ' . $identification . ' ' . $emailProprietary ."\n");
                     }
