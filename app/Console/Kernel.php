@@ -27,8 +27,8 @@ class Kernel extends ConsoleKernel
         // $schedule->command('Review:EnvioEstadosCuenta')->timezone('America/Bogota')->monthlyOn(28, '23:00');
 
         // para pruebas
-        $schedule->command('SendEmail:EstadosCuenta')->everyTenMinutes();
-        $schedule->command('Review:EnvioEstadosCuenta')->everyTenMinutes();
+        $schedule->command('SendEmail:EstadosCuenta')->everyMinute();
+        $schedule->command('Review:EnvioEstadosCuenta')->everyMinute();
 
     }
 
