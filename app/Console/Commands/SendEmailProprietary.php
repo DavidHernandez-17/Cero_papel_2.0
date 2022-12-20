@@ -33,13 +33,21 @@ class SendEmailProprietary extends Command
             //Recorrer todas las carpetas del año actual, utilizando el array creado $meses
             for ($i=0; $i < $currentMonth; $i++)
             { 
+                
+                //Pruebas
+                // $currentFolder = opendir("\\\\10.1.1.82\Simi\pdf\\Estados\\{$currentYear}\\{$meses[$i]}");  //Carpeta actual respecto al mes
 
-                $currentFolder = opendir("\\\\10.1.1.82\Simi\pdf\\Estados\\{$currentYear}\\{$meses[$i]}");  //Carpeta actual respecto al mes
+                //Producción
+                $currentFolder = opendir("//mnt//server//Estados//{$currentYear}//{$meses[$i]}"); //Carpeta actual respecto al mes
 
                 //Recorremos los elementos de la carpeta actual
                 while( $file = readdir($currentFolder)) 
                 {
-                    $routeFile = "\\\\10.1.1.82\Simi\pdf\\Estados\\{$currentYear}\\{$meses[$i]}\\{$file}";
+                    //Pruebas
+                    // $routeFile = "\\\\10.1.1.82\Simi\pdf\\Estados\\{$currentYear}\\{$meses[$i]}\\{$file}";
+
+                    //Producción
+                    $routeFile = "//mnt//server//Estados//{$currentYear}//{$meses[$i]}//{$file}";
 
                     $ext = pathinfo($routeFile, PATHINFO_EXTENSION);
 
