@@ -28,7 +28,8 @@ class MoveFileController extends Controller
         // Para producción
         $destination = "/mnt/server/EstadosCuentaEnviados/{$currentYear}/{$currentMonth}/{$todayDate}";
 
-        try {
+        try 
+        {
             //Validar si la carpeta existe con fecha actual
             if (is_dir($destination)) 
             {
