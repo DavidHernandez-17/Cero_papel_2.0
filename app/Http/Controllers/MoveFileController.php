@@ -33,12 +33,12 @@ class MoveFileController extends Controller
             //Validar si la carpeta existe con fecha actual
             if (is_dir($destination)) 
             {
-                $moved = rename($origin, $destination . '\\' . $nameFile);
+                $moved = rename($origin, $destination . '/' . $nameFile);
             } 
             else
             {
                 mkdir($destination);
-                $moved = rename($origin, $destination . '\\' . $nameFile);
+                $moved = rename($origin, $destination . '/' . $nameFile);
             }
         } 
         catch (\Throwable $th) 
