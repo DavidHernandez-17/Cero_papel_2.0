@@ -56,7 +56,7 @@ class FileValidatorEstadosCuentaController extends Controller
                         $nameProprietaryConverted = ucwords(strtolower($nameProprietary));
 
                         //Realiza envío de correo electrónico, adjunto archivo relacionado.
-                        $data["email"] = 'desarrollo5@albertoalvarez.com';
+                        $data["email"] = $emailProprietary;
                         $data["nameProprietary"] = $nameProprietaryConverted;
                         $data["cedulaPropietario"] = "Estado de cuenta - ".$identification;
 
