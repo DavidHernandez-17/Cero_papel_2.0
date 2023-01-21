@@ -22,18 +22,23 @@ class MoveFileController extends Controller
 
         $origin = $currentLocation;
 
-        $destination = "\\\\10.1.1.82\Simi\pdf\\Estados\\EstadosCuentaEnviados\\{$currentYear}\\{$currentMonth}\\{$todayDate}";
+        // Para pruebas
+        // $destination = "\\\\10.1.1.82\Simi\pdf\\Estados\\EstadosCuentaEnviados\\{$currentYear}\\{$currentMonth}\\{$todayDate}";
 
-        try {
+        // Para producción
+        $destination = "/mnt/server/EstadosCuentaEnviados/{$currentYear}/{$currentMonth}/{$todayDate}";
+
+        try 
+        {
             //Validar si la carpeta existe con fecha actual
             if (is_dir($destination)) 
             {
-                $moved = rename($origin, $destination . '\\' . $nameFile);
+                $moved = rename($origin, $destination . '/' . $nameFile);
             } 
             else
             {
                 mkdir($destination);
-                $moved = rename($origin, $destination . '\\' . $nameFile);
+                $moved = rename($origin, $destination . '/' . $nameFile);
             }
         } 
         catch (\Throwable $th) 

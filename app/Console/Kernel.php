@@ -23,12 +23,12 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // para producción
-        // $schedule->command('SendEmail:EstadosCuenta')->timezone('America/Bogota')->dailyAt('03:00');
-        // $schedule->command('Review:EnvioEstadosCuenta')->timezone('America/Bogota')->monthlyOn(28, '23:00');
+        $schedule->command('SendEmail:EstadosCuenta')->timezone('America/Bogota')->dailyAt('10:20');
+        $schedule->command('Review:EnvioEstadosCuenta')->timezone('America/Bogota')->monthlyOn(28, '23:00');
 
         // para pruebas
-        $schedule->command('SendEmail:EstadosCuenta')->everyMinute();
-        $schedule->command('Review:EnvioEstadosCuenta')->everyMinute();
+        // $schedule->command('SendEmail:EstadosCuenta')->everyMinute();
+        // $schedule->command('Review:EnvioEstadosCuenta')->everyMinute();
 
     }
 
