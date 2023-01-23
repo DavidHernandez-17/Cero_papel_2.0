@@ -25,6 +25,8 @@ class Kernel extends ConsoleKernel
         // para producción
         $schedule->command('SendEmail:EstadosCuenta')->timezone('America/Bogota')->dailyAt('10:20');
         $schedule->command('Review:EnvioEstadosCuenta')->timezone('America/Bogota')->monthlyOn(28, '23:00');
+        $schedule->command('UnionTable:owner')->timezone('America/Bogota')->dailyAt('08:00');
+        $schedule->command('UnionTable:co_owner')->timezone('America/Bogota')->dailyAt('08:30');
 
         // para pruebas
         // $schedule->command('SendEmail:EstadosCuenta')->everyMinute();

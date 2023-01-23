@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Proprietary;
+use App\Models\UnionTables\Owner_Coowner;
 use Illuminate\Support\Facades\Mail;
 
 class FileValidatorEstadosCuentaController extends Controller
@@ -19,7 +20,7 @@ class FileValidatorEstadosCuentaController extends Controller
             $identification = substr($separator[2], 0, -4);
 
             //Consulta en la base de datos, MySQL
-            $searchers = Proprietary::where('Ced_Prop', $identification)->limit(1)->get();
+            $searchers = Owner_Coowner::where('ced_cliente', $identification)->limit(1)->get();
 
             //Si encuentra un registro relacionado con $identification
             if (sizeof($searchers) != 0 )
@@ -30,8 +31,8 @@ class FileValidatorEstadosCuentaController extends Controller
                 foreach ($searchers as $searcher)
                 {
                     //Atributos del propietario
-                    $emailProprietary = $searcher->Email_Prop;
-                    $nameProprietary = $searcher->Propietario;
+                    $emailProprietary = $searcher['email_cliente'];
+                    $nameProprietary = $searcher['nombre_cliente'];
 
                     //Valida si el propietario tiene correo electrónico
                     if( empty($emailProprietary) == true )
