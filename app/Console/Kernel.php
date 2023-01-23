@@ -23,7 +23,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // para producción
-        $schedule->command('SendEmail:EstadosCuenta')->timezone('America/Bogota')->dailyAt('10:20');
+        $schedule->command('SendEmail:EstadosCuenta')->timezone('America/Bogota')->dailyAt('10:45');
         $schedule->command('Review:EnvioEstadosCuenta')->timezone('America/Bogota')->monthlyOn(28, '23:00');
         $schedule->command('UnionTable:owner')->timezone('America/Bogota')->dailyAt('08:00');
         $schedule->command('UnionTable:co_owner')->timezone('America/Bogota')->dailyAt('08:30');
