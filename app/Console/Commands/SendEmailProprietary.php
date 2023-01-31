@@ -69,7 +69,7 @@ class SendEmailProprietary extends Command
                         $countFiles += 1;
                         // echo($countFiles . ' ' . $baseName ."\n");
                         $fileValidator = new FileValidatorEstadosCuentaController;
-                        // $fileValidator->IdentificationValidator($baseName, $adjunto, $routeFile);
+                        $fileValidator->IdentificationValidator($baseName, $adjunto, $routeFile);
                     }
                 }
             }

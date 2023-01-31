@@ -55,7 +55,7 @@ class ReadPreviousYearController extends Controller
                 }
             }
 
-            echo('-> Cantidad de archivos pdf año anterior'. number_format($countFiles, 0) . "\n");
+            echo('-> Cantidad de archivos pdf año y mes anterior: '. number_format($countFiles, 0) . "\n");
         }
     }
 }
