@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Http\Controllers\EstadosCuenta\ReadPreviousYearController;
 use App\Http\Controllers\FileValidatorEstadosCuentaController;
 use App\Http\Controllers\LogsEstadosCuentaController;
 use Illuminate\Console\Command;
@@ -22,14 +23,18 @@ class SendEmailProprietary extends Command
         //Año actual
         $currentYear = date("Y");
         
-        //Mes actual -> Agrego 0 si el mes es menor que 10 para que sea igual al nombre de las carpetas
-        $currentMonth = date("m") < 10 && date("m") >= '1' ? '0'. date("m") : date("m"); 
-
+        //Mes actual
+        $currentMonth = date("m"); 
+        
         //Contadores
         $countFiles = 0;
 
         try 
         {
+            //Invoco controlador para recorrer el mes 12 del año anterior, si el mes actual es 01
+            $PreviousYear = new ReadPreviousYearController;
+            $PreviousYear->PreviousYear($meses);
+                        
             //Recorrer todas las carpetas del año actual, utilizando el array creado $meses
             for ($i=0; $i < $currentMonth; $i++)
             { 
@@ -64,7 +69,7 @@ class SendEmailProprietary extends Command
                         $countFiles += 1;
                         // echo($countFiles . ' ' . $baseName ."\n");
                         $fileValidator = new FileValidatorEstadosCuentaController;
-                        $fileValidator->IdentificationValidator($baseName, $adjunto, $routeFile);
+                        // $fileValidator->IdentificationValidator($baseName, $adjunto, $routeFile);
                     }
                 }
             }
