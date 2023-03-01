@@ -23,10 +23,10 @@ class MoveFileController extends Controller
         $origin = $currentLocation;
 
         // Para pruebas
-        // $destination = "\\\\10.1.1.82\Simi\pdf\\Estados\\EstadosCuentaEnviados\\{$currentYear}\\{$currentMonth}\\{$todayDate}";
+        $destination = "\\\\10.1.1.82\Simi\pdf\\Estados\\EstadosCuentaEnviados\\{$currentYear}\\{$currentMonth}\\{$todayDate}";
 
         // Para producción
-        $destination = "/mnt/server/EstadosCuentaEnviados/{$currentYear}/{$currentMonth}/{$todayDate}";
+        //$destination = "/mnt/server/EstadosCuentaEnviados/{$currentYear}/{$currentMonth}/{$todayDate}";
 
         try 
         {

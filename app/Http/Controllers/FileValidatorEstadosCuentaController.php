@@ -49,7 +49,7 @@ class FileValidatorEstadosCuentaController extends Controller
                             $file
                         );
 
-                        echo('No tiene correo'. ' '.$identification."\n");
+                        //echo('No tiene correo'. ' '.$identification."\n");
                     }
                     else
                     {
@@ -82,7 +82,7 @@ class FileValidatorEstadosCuentaController extends Controller
                         $moveFile = new MoveFileController();
                         $moveFile->movingFile($currentDirectory, $file);
 
-                        // dd('Proceso realizado correctamente.' . ' ' . $identification . ' ' . $emailProprietary ."\n");
+                        //dd('Proceso realizado correctamente.' . ' ' . $identification . ' ' . $emailProprietary ."\n");
                     }
                 }
             }

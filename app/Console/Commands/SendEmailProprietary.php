@@ -40,19 +40,19 @@ class SendEmailProprietary extends Command
             { 
                 
                 //Pruebas
-                // $currentFolder = opendir("\\\\10.1.1.82\Simi\pdf\\Estados\\{$currentYear}\\{$meses[$i]}");  //Carpeta actual respecto al mes
+                $currentFolder = opendir("\\\\10.1.1.82\Simi\pdf\\Estados\\{$currentYear}\\{$meses[$i]}");  //Carpeta actual respecto al mes
 
                 //Producción
-                $currentFolder = opendir("/mnt/server/{$currentYear}/{$meses[$i]}"); //Carpeta actual respecto al mes
+                //$currentFolder = opendir("/mnt/server/{$currentYear}/{$meses[$i]}"); //Carpeta actual respecto al mes
 
                 //Recorremos los elementos de la carpeta actual
                 while( $file = readdir($currentFolder)) 
                 {
                     //Pruebas
-                    // $routeFile = "\\\\10.1.1.82\Simi\pdf\\Estados\\{$currentYear}\\{$meses[$i]}\\{$file}";
+                    $routeFile = "\\\\10.1.1.82\Simi\pdf\\Estados\\{$currentYear}\\{$meses[$i]}\\{$file}";
 
                     //Producción
-                    $routeFile = "/mnt/server/{$currentYear}/{$meses[$i]}/{$file}";
+                    //$routeFile = "/mnt/server/{$currentYear}/{$meses[$i]}/{$file}";
 
                     $ext = pathinfo($routeFile, PATHINFO_EXTENSION);
 
