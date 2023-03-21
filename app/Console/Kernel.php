@@ -2,7 +2,6 @@
 
 namespace App\Console;
 
-use App\Console\Commands\SendEmailProprietary;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -16,14 +15,14 @@ class Kernel extends ConsoleKernel
      */
 
     protected $commands = [
-        Commands\SendEmailProprietary::class
+        Commands\ShippingTypeRedirection::class
     ];
 
 
     protected function schedule(Schedule $schedule)
     {
         // para producción
-        $schedule->command('SendEmail:EstadosCuenta')->timezone('America/Bogota')->dailyAt('18:00');
+        $schedule->command('ShippingType:redirection')->timezone('America/Bogota')->dailyAt('18:00');
         $schedule->command('Review:EnvioEstadosCuenta')->timezone('America/Bogota')->monthlyOn(28, '23:00');
         $schedule->command('UnionTable:owner')->timezone('America/Bogota')->dailyAt('17:00');
         $schedule->command('UnionTable:co_owner')->timezone('America/Bogota')->dailyAt('17:30');

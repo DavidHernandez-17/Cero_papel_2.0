@@ -78,16 +78,16 @@ class GetFilePDFAccountStatementsController extends Controller
         } 
         catch (\Throwable $th) 
         {
-            //Registro de log exitoso
-            // $logController->log_done(
-            //     'Carpeta no existente'. $th,
-            //     $shippingName,
-            //     'null',
-            //     'null',
-            //     $shippingName,
-            //     '0',
-            //     'null'
-            // );
+
+            $logController->log_done(
+                'Carpeta no existente'. $th,
+                $shippingName,
+                'null',
+                'null',
+                $shippingName,
+                '0',
+                'null'
+            );
 
             echo($th);
 

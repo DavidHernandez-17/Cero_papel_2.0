@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Http\Controllers\accountStatements\GetFilePDFAccountStatementsController;
+use App\Http\Controllers\certificates\GetFilePDFCertificatesController;
 use App\Http\Controllers\FileValidatorEstadosCuentaController;
 use App\Http\Controllers\PreparingShipmentController;
 use Illuminate\Console\Command;
@@ -30,9 +31,9 @@ class ShippingTypeRedirection extends Command
      */
     public function handle()
     {
-        $shippingType = 'Estados de Cuenta';
+        $shippingType = 'Estados de Cuentass';
 
-        //Array asociativo respecto al tipo de envío y ruta de ubicación
+        //Array asociativo respecto al tipo de envío
         $shippingRoute = [
             'Estados de Cuenta' => [
                 'pruebas' => '\\\\10.1.1.82\Simi\pdf\\Estados\\',
@@ -42,20 +43,20 @@ class ShippingTypeRedirection extends Command
             'Certificados' => [
                 'pruebas' => '\\\\10.1.1.82\Simi\pdf\\Certificado\\',
                 'produccion' => '/mnt/server/',
-                'controlador' => ''
+                'controlador' => GetFilePDFCertificatesController::class
             ]
         ];
 
         //Verifica si la clave del array existe
         if (!array_key_exists($shippingType, $shippingRoute)) {
-            return 'Tipo de envío no encontrado';
+            echo('Tipo de envío no encontrado');
+        }
+        else{
+            //Obtengo acceso al controlador respecto al tipo de envio
+            $sendRoute = new $shippingRoute[$shippingType]['controlador'];
+            $sendRoute->get_file($shippingRoute[$shippingType], $shippingType);
         }
         
-        //Obtengo acceso al controlador respecto al tipo de envio
-        $sendRoute = new $shippingRoute[$shippingType]['controlador'];
-        $sendRoute->get_file($shippingRoute[$shippingType], $shippingType);
-
-
         return Command::SUCCESS;
     }
 

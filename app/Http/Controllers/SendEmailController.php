@@ -34,7 +34,7 @@ class SendEmailController extends Controller
                             $shippingName,
                             'null',
                             $identification,
-                            $shippingName,
+                            'null',
                             '0',
                             $baseName
                         );
@@ -47,15 +47,15 @@ class SendEmailController extends Controller
                         $shippingCharacteristics = [
                             'Estados de Cuenta' => [
                                 'subject' => "Estado de cuenta - {$identification}",
-                                'email_body' => 'EstadosCuenta.EstadoCuenta'
+                                'email_body' => 'AccountStatements.body'
                             ],
                             'Certificados' => [
-                                'subject' => "Certificados de ingreso - {$identification}",
+                                'subject' => "Certificados de ingresos - {$identification}",
                                 'email_body' => 'Certificates.body'
                             ]
                         ];
 
-                        $data["email"] = 'desarrollo5@albertoalvarez.com';
+                        $data["email"] = $emailClient;
                         $data["nameClient"] = $nameClientConverted;
                         $data["subject"] = $shippingCharacteristics[$shippingName]['subject'];
                         $data["emailBody"] = $shippingCharacteristics[$shippingName]['email_body'];
@@ -72,16 +72,16 @@ class SendEmailController extends Controller
                             $shippingName,
                             $data["email"],
                             $identification,
-                            $shippingName,
+                            $data["subject"],
                             '1',
-                            $attached
+                            $baseName
                         );
 
                         //Mover archivo a carpeta EstadosCuentaEnviados
                         $moveFile = new MoveFileController();
                         $moveFile->movingFile($routeFile, $baseName, $shippingName);
 
-                        echo('Proceso realizado correctamente.' . ' ' . $identification . ' ' . $emailClient . "\n");
+                        //echo('Proceso realizado correctamente.' . ' ' . $identification . ' ' . $emailClient . "\n");
                     }
                 }
             } else {
@@ -90,12 +90,12 @@ class SendEmailController extends Controller
                     $shippingName,
                     'null',
                     $identification,
-                    $shippingName,
+                    'null',
                     '0',
-                    $attached
+                    $baseName
                 );
 
-                echo('Identificación no encontrada en base de datos');
+                //echo('Identificación no encontrada en base de datos');
             }
         } catch (\Throwable $th) {
             //Registro de log, envio no realizado
@@ -104,9 +104,9 @@ class SendEmailController extends Controller
                 $shippingName,
                 'null',
                 'null',
-                $shippingName,
+                'null',
                 '0',
-                $attached
+                $baseName
             );
         }
     }

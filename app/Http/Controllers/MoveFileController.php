@@ -27,8 +27,8 @@ class MoveFileController extends Controller
                 'destination_production' => "/mnt/server/EstadosCuentaEnviados/{$currentYear}/{$currentMonth}/{$todayDate}"
             ],
             'Certificados' => [
-                'destination_test' => '\\\\10.1.1.82\Simi\pdf\\Certificado\\CertificadosEnviados',
-                'destination_production' => '/mnt/server/',
+                'destination_test' => "\\\\10.1.1.82\Simi\pdf\\Certificado\\CertificadosEnviados\\{$todayDate}",
+                'destination_production' => "/mnt/server/{$todayDate}",
             ]
         ];
 
@@ -58,7 +58,7 @@ class MoveFileController extends Controller
                 $shippingName,
                 'null',
                 'null',
-                $shippingName,
+                'null',
                 '1',
                 $baseName
             );
