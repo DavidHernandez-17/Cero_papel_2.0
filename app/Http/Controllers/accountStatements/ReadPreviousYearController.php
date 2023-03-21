@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\EstadosCuenta;
+namespace App\Http\Controllers\accountStatements;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\FileValidatorEstadosCuentaController;
+use App\Http\Controllers\SendEmailController;
 use Illuminate\Http\Request;
 
 class ReadPreviousYearController extends Controller
 {
-    public function PreviousYear($meses)
+    public function PreviousYear($months, $route, $shippingName)
     {
         if( date("m") == '01' || date("m") == '1')
         {
@@ -21,19 +22,19 @@ class ReadPreviousYearController extends Controller
             for ($i = 11; $i == 11; $i++)
             {
                 //Pruebas
-                //$currentFolder = opendir("\\\\10.1.1.82\Simi\pdf\\Estados\\{$previousYear}\\{$meses[$i]}");
+                //$currentFolder = opendir("{$route['pruebas']}{$previousYear}\\{$months[$i]}");  //Carpeta actual respecto al mes
 
                 //Producción
-                $currentFolder = opendir("/mnt/server/{$previousYear}/{$meses[$i]}"); //Carpeta mes 12 mes anterior
+                $currentFolder = opendir("{$route['produccion']}{$previousYear}/{$months[$i]}"); //Carpeta actual respecto al mes
 
                 //Recorremos los elementos de la carpeta actual
                 while( $file = readdir($currentFolder)) 
                 {
                     //Pruebas
-                    //$routeFile = "\\\\10.1.1.82\Simi\pdf\\Estados\\{$previousYear}\\{$meses[$i]}\\{$file}";
+                    //$routeFile = "{$route['pruebas']}{$previousYear}\\{$months[$i]}\\{$file}";
 
                     //Producción
-                    $routeFile = "/mnt/server/{$previousYear}/{$meses[$i]}/{$file}";
+                    $routeFile = "{$route['produccion']}{$previousYear}/{$months[$i]}/{$file}";
 
                     $ext = pathinfo($routeFile, PATHINFO_EXTENSION);
 
@@ -42,15 +43,21 @@ class ReadPreviousYearController extends Controller
                     {
                         //Nombre del archivo
                         $baseName= pathinfo($routeFile, PATHINFO_BASENAME);
-                        
-                        //Archivo adjunto
-                        $adjunto = fopen($routeFile, "r");
 
-                        // Definición de contador de archivo e invoco al validador de archivos
+                        //Archivo adjunto
+                        $attached = fopen($routeFile, "r");
+
+                        // Divido el nombre del archivo por '_'
+                        $separator = explode('_', $file);
+
+                        //Obtengo identificación del cliente y le resta los 4 últimos caracteres
+                        $identification = substr($separator[2], 0, -4);
+
+                        // Definición de contador de archivo e invoco el controlador de envíos
                         $countFiles += 1;
                         //echo($countFiles . ' ' . $baseName ."\n");
-                        $fileValidator = new FileValidatorEstadosCuentaController;
-                        $fileValidator->IdentificationValidator($baseName, $adjunto, $routeFile);
+                        $send = new SendEmailController;
+                        $send->send_any_type_email($baseName, $attached, $routeFile, $identification, $shippingName);
                     }
                 }
             }

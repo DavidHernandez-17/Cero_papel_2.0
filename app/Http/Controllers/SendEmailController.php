@@ -67,15 +67,15 @@ class SendEmailController extends Controller
                         });
 
                         //Registro de log exitoso
-                        // $logController->log_done(
-                        //     'El correo fue enviado correctamente',
-                        //     $shippingName,
-                        //     $data["email"],
-                        //     $identification,
-                        //     $shippingName,
-                        //     '1',
-                        //     $attached
-                        // );
+                        $logController->log_done(
+                            'El correo fue enviado correctamente',
+                            $shippingName,
+                            $data["email"],
+                            $identification,
+                            $shippingName,
+                            '1',
+                            $attached
+                        );
 
                         //Mover archivo a carpeta EstadosCuentaEnviados
                         $moveFile = new MoveFileController();
@@ -85,15 +85,15 @@ class SendEmailController extends Controller
                     }
                 }
             } else {
-                // $logController->log_done(
-                //     'Identificación no encontrada en base de datos',
-                //     $shippingName,
-                //     'null',
-                //     $identification,
-                //     $shippingName,
-                //     '0',
-                //     $attached
-                // );
+                $logController->log_done(
+                    'Identificación no encontrada en base de datos',
+                    $shippingName,
+                    'null',
+                    $identification,
+                    $shippingName,
+                    '0',
+                    $attached
+                );
 
                 echo('Identificación no encontrada en base de datos');
             }

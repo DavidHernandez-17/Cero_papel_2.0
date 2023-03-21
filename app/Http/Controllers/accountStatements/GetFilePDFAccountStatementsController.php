@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\accountStatements;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\EstadosCuenta\ReadPreviousYearController;
 use App\Http\Controllers\LogsEstadosCuentaController;
 use App\Http\Controllers\SendEmailController;
 use Illuminate\Http\Request;
@@ -16,7 +15,7 @@ class GetFilePDFAccountStatementsController extends Controller
 
         $logController = new LogsEstadosCuentaController();  //El name controller se debe cambiar por LogsController
 
-        $meses = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+        $months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
 
         //Año actual
         $currentYear = date("Y");
@@ -31,25 +30,25 @@ class GetFilePDFAccountStatementsController extends Controller
         {
             //Invoco controlador para recorrer el mes 12 del año anterior, si el mes actual es 01
             $PreviousYear = new ReadPreviousYearController;
-            $PreviousYear->PreviousYear($meses);
+            $PreviousYear->PreviousYear($months, $route, $shippingName);
                         
-            //Recorrer todas las carpetas del año actual, utilizando el array creado $meses
+            //Recorrer todas las carpetas del año actual, utilizando el array creado $months
             for ($i=0; $i < $currentMonth; $i++)
             {
                 //Pruebas
-                $currentFolder = opendir("{$route['pruebas']}{$currentYear}\\{$meses[$i]}");  //Carpeta actual respecto al mes
+                $currentFolder = opendir("{$route['pruebas']}{$currentYear}\\{$months[$i]}");  //Carpeta actual respecto al mes
 
                 //Producción
-                //$currentFolder = opendir("{$route['produccion']}{$currentYear}/{$meses[$i]}"); //Carpeta actual respecto al mes
+                //$currentFolder = opendir("{$route['produccion']}{$currentYear}/{$months[$i]}"); //Carpeta actual respecto al mes
 
                 //Recorremos los elementos de la carpeta actual
                 while( $file = readdir($currentFolder)) 
                 {
                     //Pruebas
-                    $routeFile = "{$route['pruebas']}{$currentYear}\\{$meses[$i]}\\{$file}";
+                    $routeFile = "{$route['pruebas']}{$currentYear}\\{$months[$i]}\\{$file}";
 
                     //Producción
-                    //$routeFile = "{$route['produccion']}{$currentYear}/{$meses[$i]}/{$file}";
+                    //$routeFile = "{$route['produccion']}{$currentYear}/{$months[$i]}/{$file}";
 
                     $ext = pathinfo($routeFile, PATHINFO_EXTENSION);
 
