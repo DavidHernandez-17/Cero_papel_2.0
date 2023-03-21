@@ -30,11 +30,11 @@ class ShippingTypeRedirection extends Command
      */
     public function handle()
     {
-        $shippingType = 'Estado de Cuenta';
+        $shippingType = 'Estados de Cuenta';
 
         //Array asociativo respecto al tipo de envío y ruta de ubicación
-        $routesShipping = [
-            'Estado de Cuenta' => [
+        $shippingRoute = [
+            'Estados de Cuenta' => [
                 'pruebas' => '\\\\10.1.1.82\Simi\pdf\\Estados\\',
                 'produccion' => '/mnt/server/',
                 'controlador' => GetFilePDFAccountStatementsController::class
@@ -47,12 +47,13 @@ class ShippingTypeRedirection extends Command
         ];
 
         //Verifica si la clave del array existe
-        if (!array_key_exists($shippingType, $routesShipping)) {
+        if (!array_key_exists($shippingType, $shippingRoute)) {
             return 'Tipo de envío no encontrado';
         }
         
-        $sendRoute = new $routesShipping[$shippingType]['controlador'];
-        $sendRoute->get_file($routesShipping[$shippingType], $shippingType);
+        //Obtengo acceso al controlador respecto al tipo de envio
+        $sendRoute = new $shippingRoute[$shippingType]['controlador'];
+        $sendRoute->get_file($shippingRoute[$shippingType], $shippingType);
 
 
         return Command::SUCCESS;

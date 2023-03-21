@@ -14,7 +14,7 @@ class GetFilePDFAccountStatementsController extends Controller
 
         echo('Inicia proceso de envios '.$shippingName. "\n");
 
-        $logController = new LogsEstadosCuentaController();
+        $logController = new LogsEstadosCuentaController();  //El name controller se debe cambiar por LogsController
 
         $meses = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
 
@@ -30,8 +30,8 @@ class GetFilePDFAccountStatementsController extends Controller
         try 
         {
             //Invoco controlador para recorrer el mes 12 del año anterior, si el mes actual es 01
-            // $PreviousYear = new ReadPreviousYearController;
-            // $PreviousYear->PreviousYear($meses);
+            $PreviousYear = new ReadPreviousYearController;
+            $PreviousYear->PreviousYear($meses);
                         
             //Recorrer todas las carpetas del año actual, utilizando el array creado $meses
             for ($i=0; $i < $currentMonth; $i++)
@@ -65,12 +65,12 @@ class GetFilePDFAccountStatementsController extends Controller
                         // Divido el nombre del archivo por '_'
                         $separator = explode('_', $file);
 
-                        //Obtengo cédula o nit propietario y le resta los 4 últimos caracteres
+                        //Obtengo identificación del cliente y le resta los 4 últimos caracteres
                         $identification = substr($separator[2], 0, -4);
 
-                        // Definición de contador de archivo e invoco al validador de archivos
+                        // Definición de contador de archivo e invoco el controlador de envíos
                         $countFiles += 1;
-                        //echo($countFiles . ' ' . $baseName ."\n");
+                        echo($countFiles . ' ' . $baseName ."\n");
                         $send = new SendEmailController;
                         $send->send_any_type_email($baseName, $attached, $routeFile, $identification, $shippingName);
                     }

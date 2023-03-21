@@ -27,6 +27,7 @@ class SendEmailController extends Controller
 
                     //Valida si el cliente tiene correo electrónico
                     if (empty($emailClient) == true) {
+
                         //Registro de log, correo electrónico no encontrado
                         $logController->log_done(
                             'Correo electrónico no encontrado en base de datos',
@@ -38,19 +39,30 @@ class SendEmailController extends Controller
                             $baseName
                         );
 
-                        //echo('No tiene correo'. ' '.$identification."\n");
                     } else {
                         //Tomo el nombre del cliente y convierto en mayúscula el primer caracter de cada palabra de la cadena
                         $nameClientConverted = ucwords(strtolower($nameClient));
 
-                        //Realiza envío de correo electrónico, adjunto archivo relacionado.
-                        $data["email"] = $emailClient;
-                        $data["nameClient"] = $nameClientConverted;
-                        $data["identificacionCliente"] = $shippingName.' - '. $identification;
+                        //Características del envío
+                        $shippingCharacteristics = [
+                            'Estados de Cuenta' => [
+                                'subject' => "Estado de cuenta - {$identification}",
+                                'email_body' => 'EstadosCuenta.EstadoCuenta'
+                            ],
+                            'Certificados' => [
+                                'subject' => "Certificados de ingreso - {$identification}",
+                                'email_body' => 'Certificates.body'
+                            ]
+                        ];
 
-                        Mail::send('EstadosCuenta.EstadoCuenta', $data, function ($message) use ($data, $attached, $baseName) {
+                        $data["email"] = 'desarrollo5@albertoalvarez.com';
+                        $data["nameClient"] = $nameClientConverted;
+                        $data["subject"] = $shippingCharacteristics[$shippingName]['subject'];
+                        $data["emailBody"] = $shippingCharacteristics[$shippingName]['email_body'];
+
+                        Mail::send($data["emailBody"], $data, function ($message) use ($data, $attached, $baseName) {
                             $message->to($data["email"], $data["email"])
-                                ->subject($data["identificacionCliente"])
+                                ->subject($data["subject"])
                                 ->attachData($attached, $baseName);
                         });
 
@@ -66,26 +78,27 @@ class SendEmailController extends Controller
                         // );
 
                         //Mover archivo a carpeta EstadosCuentaEnviados
-                        // $moveFile = new MoveFileController();
-                        // $moveFile->movingFile($routeFile, $attached, $shippingName);
+                        $moveFile = new MoveFileController();
+                        $moveFile->movingFile($routeFile, $baseName, $shippingName);
 
-                        dd('Proceso realizado correctamente.' . ' ' . $identification . ' ' . $emailClient ."\n");
+                        echo('Proceso realizado correctamente.' . ' ' . $identification . ' ' . $emailClient . "\n");
                     }
                 }
             } else {
-                    $logController->log_done(
-                    'Identificación no encontrada en base de datos',
-                    $shippingName,
-                    'null',
-                    $identification,
-                    $shippingName,
-                    '0',
-                    $attached
-                );
+                // $logController->log_done(
+                //     'Identificación no encontrada en base de datos',
+                //     $shippingName,
+                //     'null',
+                //     $identification,
+                //     $shippingName,
+                //     '0',
+                //     $attached
+                // );
+
+                echo('Identificación no encontrada en base de datos');
             }
         } catch (\Throwable $th) {
             //Registro de log, envio no realizado
-            $logController = new LogsEstadosCuentaController();
             $logController->log_done(
                 'Correo no enviado: ' . $th,
                 $shippingName,

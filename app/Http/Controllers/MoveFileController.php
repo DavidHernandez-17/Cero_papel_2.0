@@ -6,9 +6,8 @@ use Illuminate\Http\Request;
 
 class MoveFileController extends Controller
 {
-    public function movingFile($currentLocation, $nameFile)
+    public function movingFile($routeFile, $baseName, $shippingName)
     {
-        //Definición de hora local Colombiana
         date_default_timezone_set("America/Bogota");
 
         //Definición año actual
@@ -20,41 +19,48 @@ class MoveFileController extends Controller
         //Definición fecha actual
         $todayDate = date("Y-m-d"); 
 
-        $origin = $currentLocation;
+        $origin = $routeFile;
 
-        // Para pruebas
-        $destination = "\\\\10.1.1.82\Simi\pdf\\Estados\\EstadosCuentaEnviados\\{$currentYear}\\{$currentMonth}\\{$todayDate}";
+        $movementPath = [
+            'Estados de Cuenta' => [
+                'destination_test' => "\\\\10.1.1.82\Simi\pdf\\Estados\\EstadosCuentaEnviados\\{$currentYear}\\{$currentMonth}\\{$todayDate}",
+                'destination_production' => "/mnt/server/EstadosCuentaEnviados/{$currentYear}/{$currentMonth}/{$todayDate}"
+            ],
+            'Certificados' => [
+                'destination_test' => '\\\\10.1.1.82\Simi\pdf\\Certificado\\CertificadosEnviados',
+                'destination_production' => '/mnt/server/',
+            ]
+        ];
 
-        // Para producción
-        //$destination = "/mnt/server/EstadosCuentaEnviados/{$currentYear}/{$currentMonth}/{$todayDate}";
-
-        try 
+        try
         {
+            $destination = $movementPath[$shippingName]['destination_test'];
+
             //Validar si la carpeta existe con fecha actual
             if (is_dir($destination)) 
             {
-                $moved = rename($origin, $destination . '/' . $nameFile);
+                rename($origin, $destination . '/' . $baseName);
             } 
             else
             {
                 mkdir($destination);
-                $moved = rename($origin, $destination . '/' . $nameFile);
+                rename($origin, $destination . '/' . $baseName);
             }
         } 
         catch (\Throwable $th) 
         {
-            echo('Error, ruta de archivo no modificada '. "\n");
+            echo('Error, ruta de archivo no modificada '. $th ."\n");
 
             //Registro de log movimiento de carpeta no realizado
             $logController = new LogsEstadosCuentaController();
             $logController->log_done(
-                'La ubicación del archivo '.$nameFile.' no fue modificada correctamente '. $th,
-                'Estados de cuenta',
+                'La ubicación del archivo '.$baseName.' no fue modificada correctamente '. $th,
+                $shippingName,
                 'null',
                 'null',
-                'Estados de cuenta',
+                $shippingName,
                 '1',
-                $nameFile
+                $baseName
             );
         }
     }
