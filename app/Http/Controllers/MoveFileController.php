@@ -24,11 +24,11 @@ class MoveFileController extends Controller
         $movementPath = [
             'Estados de Cuenta' => [
                 'destination_test' => "\\\\10.1.1.82\Simi\pdf\\Estados\\EstadosCuentaEnviados\\{$currentYear}\\{$currentMonth}\\{$todayDate}",
-                'destination_production' => "/mnt/server/EstadosCuentaEnviados/{$currentYear}/{$currentMonth}/{$todayDate}"
+                'destination_production' => "/mnt/server/Estados/EstadosCuentaEnviados/{$currentYear}/{$currentMonth}/{$todayDate}"
             ],
             'Certificados' => [
                 'destination_test' => "\\\\10.1.1.82\Simi\pdf\\Certificado\\CertificadosEnviados\\{$todayDate}",
-                'destination_production' => "/mnt/server/{$todayDate}",
+                'destination_production' => "/mnt/server/Certificado/CertificadosEnviados/{$todayDate}",
             ]
         ];
 

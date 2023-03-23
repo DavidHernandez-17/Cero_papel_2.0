@@ -47,21 +47,28 @@ class SendEmailController extends Controller
                         $shippingCharacteristics = [
                             'Estados de Cuenta' => [
                                 'subject' => "Estado de cuenta - {$identification}",
-                                'email_body' => 'AccountStatements.body'
+                                'email_body' => 'AccountStatements.body',
+                                'name_from' => 'Estado de cuenta',
+                                'from' => 'auxiliarcorrespondencia@albertoalvarez.com',
                             ],
                             'Certificados' => [
                                 'subject' => "Certificados de ingresos - {$identification}",
-                                'email_body' => 'Certificates.body'
+                                'email_body' => 'Certificates.body',
+                                'name_from' => 'Certificado de ingresos',
+                                'from' => 'certificados@albertoalvarez.com'
                             ]
                         ];
 
                         $data["email"] = $emailClient;
                         $data["nameClient"] = $nameClientConverted;
                         $data["subject"] = $shippingCharacteristics[$shippingName]['subject'];
+                        $data["name_from"] = $shippingCharacteristics[$shippingName]['name_from'];
+                        $data["from"] = $shippingCharacteristics[$shippingName]['from'];
                         $data["emailBody"] = $shippingCharacteristics[$shippingName]['email_body'];
 
                         Mail::send($data["emailBody"], $data, function ($message) use ($data, $attached, $baseName) {
-                            $message->to($data["email"], $data["email"])
+                            $message->from($data["from"], $data["name_from"])
+                                ->to($data["email"], $data["email"])
                                 ->subject($data["subject"])
                                 ->attachData($attached, $baseName);
                         });

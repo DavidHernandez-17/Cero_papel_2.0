@@ -15,7 +15,7 @@ class ShippingTypeRedirection extends Command
      *
      * @var string
      */
-    protected $signature = 'ShippingType:redirection';
+    protected $signature = 'ShippingType:redirection {shippingType}';
 
     /**
      * The console command description.
@@ -31,18 +31,20 @@ class ShippingTypeRedirection extends Command
      */
     public function handle()
     {
-        $shippingType = 'Estados de Cuentass';
+        $shippingType = $this->argument('shippingType');
+
+        // dd($shippingType);
 
         //Array asociativo respecto al tipo de envío
         $shippingRoute = [
             'Estados de Cuenta' => [
                 'pruebas' => '\\\\10.1.1.82\Simi\pdf\\Estados\\',
-                'produccion' => '/mnt/server/',
+                'produccion' => '/mnt/server/Estados',
                 'controlador' => GetFilePDFAccountStatementsController::class
             ],
             'Certificados' => [
                 'pruebas' => '\\\\10.1.1.82\Simi\pdf\\Certificado\\',
-                'produccion' => '/mnt/server/',
+                'produccion' => '/mnt/server/Certificado',
                 'controlador' => GetFilePDFCertificatesController::class
             ]
         ];
